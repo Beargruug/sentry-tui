@@ -21,6 +21,12 @@ type IssueDetailLoadedMsg struct {
 	Err   error
 }
 
+// IssueEventLoadedMsg carries just the latest event for the detail view.
+type IssueEventLoadedMsg struct {
+	Event models.Event
+	Err   error
+}
+
 // ProjectsLoadedMsg carries the project list.
 type ProjectsLoadedMsg struct {
 	Projects []models.Project

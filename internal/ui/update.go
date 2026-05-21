@@ -68,6 +68,15 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.currentView = ViewIssueDetail
 		return m, tea.Batch(cmds...)
 
+	case IssueEventLoadedMsg:
+		m.loading = false
+		if msg.Err != nil {
+			m.setStatus("Event data unavailable", true)
+			return m, tea.Batch(cmds...)
+		}
+		m.detailEvent = msg.Event
+		return m, tea.Batch(cmds...)
+
 	case ProjectsLoadedMsg:
 		if msg.Err == nil {
 			m.projects = msg.Projects
@@ -222,8 +231,16 @@ func (m Model) handleIssueListKey(msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 		}
 	case key.Matches(msg, m.keys.Enter):
 		if len(m.issues) > 0 && m.cursor < len(m.issues) {
+			// Show detail immediately with list data, fetch event in background
+			m.detailIssue = m.issues[m.cursor]
+			m.detailEvent = models.Event{}
+			m.detailScroll = 0
+			m.frameFolds = make(map[string]bool)
+			m.frameCursor = 0
+			m.frameNavMode = false
+			m.currentView = ViewIssueDetail
 			m.loading = true
-			return m, fetchIssueDetail(m.client, m.issues[m.cursor].ID)
+			return m, fetchIssueEvent(m.client, m.issues[m.cursor].ID)
 		}
 	case key.Matches(msg, m.keys.Search):
 		m.searching = true

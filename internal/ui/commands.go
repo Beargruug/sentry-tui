@@ -26,10 +26,19 @@ func fetchIssueDetail(client *api.Client, issueID string) tea.Cmd {
 		}
 		event, err := client.GetLatestEvent(issueID)
 		if err != nil {
-			// We still show the issue even if latest event fails
 			return IssueDetailLoadedMsg{Issue: issue, Err: nil}
 		}
 		return IssueDetailLoadedMsg{Issue: issue, Event: event}
+	}
+}
+
+func fetchIssueEvent(client *api.Client, issueID string) tea.Cmd {
+	return func() tea.Msg {
+		event, err := client.GetLatestEvent(issueID)
+		if err != nil {
+			return IssueEventLoadedMsg{Err: err}
+		}
+		return IssueEventLoadedMsg{Event: event}
 	}
 }
 
