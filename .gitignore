@@ -1,0 +1,17 @@
+# Binary
+sentry-tui
+dist/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Config (contains auth tokens)
+sentry-tui.yaml
+.env
