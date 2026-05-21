@@ -10,6 +10,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/exec"
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/Beargruug/sentry-tui/internal/config"
@@ -27,6 +28,9 @@ func main() {
 			os.Exit(0)
 		case "--help", "-h":
 			printHelp()
+			os.Exit(0)
+		case "update":
+			runUpdate()
 			os.Exit(0)
 		}
 	}
@@ -54,6 +58,7 @@ func printHelp() {
 
 USAGE:
   sentry-tui              Launch the TUI
+  sentry-tui update       Update to latest version
   sentry-tui --version    Print version
   sentry-tui --help       Print this help
 
@@ -83,4 +88,13 @@ KEYBOARD SHORTCUTS:
   C               Configuration
   q               Quit
 `, version)
+}
+
+func runUpdate() {
+	fmt.Println("Updating sentry-tui...")
+	cmd := exec.Command("bash", "-c",
+		"curl -fsSL https://raw.githubusercontent.com/Beargruug/sentry-tui/main/install.sh | bash")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	cmd.Run()
 }

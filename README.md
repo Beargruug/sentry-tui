@@ -48,6 +48,14 @@ go build -o sentry-tui .
 
 ---
 
+### Update
+
+```bash
+sentry-tui update
+```
+
+---
+
 ### Quick Start
 
 #### 1. Get a Sentry Auth Token

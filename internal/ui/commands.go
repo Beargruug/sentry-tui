@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	tea "github.com/charmbracelet/bubbletea"
 	"github.com/Beargruug/sentry-tui/internal/api"
 	"github.com/Beargruug/sentry-tui/internal/models"
+	tea "github.com/charmbracelet/bubbletea"
 )
 
 // ---------- Tea commands that perform API calls ----------
