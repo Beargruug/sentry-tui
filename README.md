@@ -25,24 +25,25 @@ A feature-rich terminal user interface for monitoring and managing [Sentry](http
 
 ### Installation
 
+#### Quick Install (Mac & Linux)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Beargruug/sentry-tui/main/install.sh | bash
+```
+
 #### Prerequisites
 
-- **Go 1.22+** installed ([download](https://go.dev/dl/))
 - A **Sentry account** with an **Auth Token** ([create one](https://sentry.io/settings/auth-tokens/))
 
 #### Build from source
 
+Requires **Go 1.22+** ([download](https://go.dev/dl/))
+
 ```bash
-git clone https://github.com/user/sentry-tui.git
+git clone https://github.com/Beargruug/sentry-tui.git
 cd sentry-tui
 go mod tidy
 go build -o sentry-tui .
-```
-
-#### Run directly
-
-```bash
-go run .
 ```
 
 ---
@@ -126,18 +127,6 @@ Environment variables override file values:
 | `a` | Assign to member |
 | `o` | Show permalink |
 
-#### Issue Detail
-
-| Key | Action |
-|---|---|
-| `↑` / `k` | Scroll up |
-| `↓` / `j` | Scroll down |
-| `g` | Scroll to top |
-| `esc` | Back to list |
-| `R` | Resolve / unresolve |
-| `a` | Assign |
-| `r` | Refresh detail |
-
 #### General
 
 | Key | Action |
@@ -155,8 +144,26 @@ Environment variables override file values:
 | `3` | Ignored only |
 | `4` | All statuses |
 | `5` | Cycle sort mode |
-| `6` | Cycle project |
+| `6` | Select project |
+| `7` | Select environment |
 | `0` | Reset all filters |
+
+#### Issue Detail
+
+| Key | Action |
+|---|---|
+| `↑` / `k` | Scroll up |
+| `↓` / `j` | Scroll down |
+| `d` | Half-page down |
+| `u` | Half-page up |
+| `g` | Scroll to top |
+| `G` | Scroll to bottom |
+| `tab` | Toggle frame navigation |
+| `space` | Toggle frame fold (in frame nav) |
+| `esc` | Back to list |
+| `R` | Resolve / unresolve |
+| `a` | Assign |
+| `r` | Refresh detail |
 
 ---
 
