@@ -2,11 +2,13 @@ package ui
 
 import (
 	"fmt"
+	"os"
+	"os/exec"
 	"time"
 
-	tea "github.com/charmbracelet/bubbletea"
 	"github.com/Beargruug/sentry-tui/internal/api"
 	"github.com/Beargruug/sentry-tui/internal/models"
+	tea "github.com/charmbracelet/bubbletea"
 )
 
 // ---------- Tea commands that perform API calls ----------
@@ -95,4 +97,13 @@ func tickCmd(d time.Duration) tea.Cmd {
 	return tea.Tick(d, func(t time.Time) tea.Msg {
 		return TickMsg{}
 	})
+}
+
+func runUpdate() {
+	fmt.Println("Updating sentry-tui...")
+	cmd := exec.Command("bash", "-c",
+		"curl -fsSL https://raw.githubusercontent.com/yourusername/sentry-tui/main/install.sh | bash")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	cmd.Run()
 }
